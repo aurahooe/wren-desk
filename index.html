@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Wren Desk</title>
+  <meta name="description" content="A small public desk for notes. The hour writes back." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <div class="grain" aria-hidden="true"></div>
+  <div class="wash" aria-hidden="true"></div>
+
+  <header class="top">
+    <a class="mark" href="#board">
+      <span class="bird">W</span>
+      <span>
+        <strong>Wren Desk</strong>
+        <em>the hour keeps a ledger</em>
+      </span>
+    </a>
+    <nav>
+      <a href="#hour">This hour</a>
+      <a href="#board">Public board</a>
+      <a href="#desk">Your desk</a>
+    </nav>
+    <div class="session">
+      <time id="clock">--:--</time>
+      <button type="button" class="ghost" id="authBtn">Sign in</button>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="hour">
+      <p class="kicker" id="hourKey">Hour —</p>
+      <h1 id="hourHeadline">Loading the hour…</h1>
+      <p class="lede" id="hourBlurb"></p>
+      <div class="hero-meta">
+        <span id="publicCount">— public slips</span>
+        <span class="dot"></span>
+        <span>Private notes stay off the board</span>
+      </div>
+    </section>
+
+    <section class="split" id="board">
+      <div>
+        <h2>On the board</h2>
+        <p class="quiet">Anything marked public lands here. Private work stays in your desk.</p>
+      </div>
+      <div class="stack" id="boardList">
+        <article class="card skeleton"></article>
+        <article class="card skeleton"></article>
+      </div>
+    </section>
+
+    <section class="desk" id="desk">
+      <div class="desk-head">
+        <h2>Your desk</h2>
+        <p class="quiet" id="deskHint">Sign in to keep slips. Email magic link. No password to remember.</p>
+      </div>
+      <form id="compose" class="compose" hidden>
+        <label>
+          Title
+          <input name="title" maxlength="140" required placeholder="A short name for the slip" />
+        </label>
+        <label>
+          Body
+          <textarea name="body" maxlength="8000" required rows="7" placeholder="Write the thing you would otherwise lose."></textarea>
+        </label>
+        <div class="row">
+          <label class="check">
+            <input type="checkbox" name="is_public" />
+            Show on the public board
+          </label>
+          <button type="submit" class="solid">Save slip</button>
+        </div>
+      </form>
+      <div class="stack mine" id="mineList"></div>
+    </section>
+  </main>
+
+  <dialog id="authDialog">
+    <form id="authForm" method="dialog">
+      <h3>Open the desk</h3>
+      <p>We’ll send a sign-in link to your email. Same address, same desk next time.</p>
+      <label>
+        Email
+        <input type="email" name="email" required autocomplete="email" placeholder="you@there.com" />
+      </label>
+      <div class="row">
+        <button type="button" class="ghost" id="authCancel">Close</button>
+        <button type="submit" class="solid">Send link</button>
+      </div>
+      <p class="status" id="authStatus"></p>
+    </form>
+  </dialog>
+
+  <footer>
+    <p>Wren Desk is a living room for short writing. The hour is rewritten on the clock.</p>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="./app.js"></script>
+</body>
+</html>
